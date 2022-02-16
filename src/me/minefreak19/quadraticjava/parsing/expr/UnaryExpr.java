@@ -4,6 +4,7 @@ import me.minefreak19.quadraticjava.parsing.EvaluationContext;
 
 import java.util.function.UnaryOperator;
 
+// TODO(#2): A UnaryOp enum similar to BinaryOp so the names don't have to be provided
 public class UnaryExpr extends Expr {
     
     private final UnaryOperator<Double> op;
