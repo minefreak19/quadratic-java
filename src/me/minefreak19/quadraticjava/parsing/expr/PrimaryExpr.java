@@ -16,6 +16,6 @@ public class PrimaryExpr extends Expr {
     
     @Override
     public String toString() {
-        return String.format("{ value: %f }", value);
+        return "{ value: " + value + " }";
     }
 }

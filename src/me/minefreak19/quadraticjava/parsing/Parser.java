@@ -27,7 +27,7 @@ public record Parser(List<Token> tokens) {
                 Expr result = parse();
                 Token closeParen = shift(tokens);
                 if (!closeParen.text().equals(")")) {
-                    throw new SyntaxException(String.format("Expected `)` but got `%s`", closeParen.text()));
+                    throw new SyntaxException("Expected `)` but got " + closeParen);
                 }
                 return result;
             }
@@ -56,7 +56,7 @@ public record Parser(List<Token> tokens) {
         BinaryOp bop = BinaryOp.fromString(op.text());
         
         if (bop == null) {
-            throw new SyntaxException(String.format("Unknown binary operator `%s`", op.text()));
+            throw new SyntaxException("Unknown binary operator " + op);
         }
         
         if (bop.precedence.ordinal() != precedence) {

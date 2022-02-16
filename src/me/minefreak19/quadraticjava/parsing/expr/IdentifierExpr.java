@@ -21,6 +21,6 @@ public class IdentifierExpr extends Expr {
     
     @Override
     public String toString() {
-        return String.format("{ id: \"%s\" }", this.name);
+        return "{ id: \"" + this.name + "\" }";
     }
 }

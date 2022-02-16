@@ -14,21 +14,21 @@ public class Main {
         System.out.println("Enter your expression:");
         String input = sc.nextLine();
     
-        System.out.printf("Input: %s\n", input);
+        System.out.println("Input: " + input);
     
         var lexer = new Lexer(input);
         var tokens = lexer.tokens();
-        System.out.printf("Tokenized: %s\n", tokens);
+        System.out.println("Tokenized: " + tokens);
         
         var parser = new Parser(tokens);
         var expr = parser.parse();
-        System.out.printf("Parsed: %s\n", expr);
+        System.out.println("Parsed: " + expr);
    
         var evalContext = new EvaluationContext(new HashMap<>());
         evalContext.identifiers().put("pi", Math.PI);
         evalContext.identifiers().put("e", Math.E);
         double result = expr.eval(evalContext);
-        System.out.printf("\nRESULT: \033[34;1m%s\n", result);
+        System.out.println("\nRESULT: \033[34;1m" + result);
         
         sc.close();
     }
