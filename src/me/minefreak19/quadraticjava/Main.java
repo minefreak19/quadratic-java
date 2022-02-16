@@ -9,26 +9,43 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        boolean debug = false;
+     
+        for (var arg : args) {
+            if (arg.equalsIgnoreCase("--debug")) {
+                debug = true;
+                break;
+            }
+        }
+     
         var sc = new Scanner(System.in);
         
         System.out.println("Enter your expression:");
         String input = sc.nextLine();
-    
-        System.out.println("Input: " + input);
-    
-        var lexer = new Lexer(input);
-        var tokens = lexer.tokens();
-        System.out.println("Tokenized: " + tokens);
+        if (debug) System.out.println("Input: " + input);
         
-        var parser = new Parser(tokens);
-        var expr = parser.parse();
-        System.out.println("Parsed: " + expr);
-   
-        var evalContext = new EvaluationContext(new HashMap<>());
-        evalContext.identifiers().put("pi", Math.PI);
-        evalContext.identifiers().put("e", Math.E);
-        double result = expr.eval(evalContext);
-        System.out.println("\nRESULT: \033[34;1m" + result);
+        String[] sources = input.split("\\|");
+        double[] results = new double[sources.length];
+    
+        for (int i = 0; i < sources.length; i++) {
+            String source = sources[i];
+            var lexer = new Lexer(source);
+            var tokens = lexer.tokens();
+            if (debug) System.out.println("Tokenized: " + tokens);
+            
+            var parser = new Parser(tokens);
+            var expr = parser.parse();
+            if (debug) System.out.println("Parsed: " + expr);
+       
+            var evalContext = new EvaluationContext(new HashMap<>());
+            evalContext.identifiers().put("pi", Math.PI);
+            evalContext.identifiers().put("e", Math.E);
+            double result = expr.eval(evalContext);
+            results[i] = result;
+        }
+    
+        for (double result : results)
+            System.out.println("\nRESULT: \033[34;1m" + result + "\033[0m");
         
         sc.close();
     }
