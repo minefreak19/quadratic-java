@@ -14,6 +14,20 @@ public record Parser(List<Token> tokens) {
         return text.equals("(") || text.equals(")");
     }
     
+    /**
+     * Primary parser in the recursive descent algorithm.
+     * Parses a single operand to an operation
+     * (ie a number, identifier, or parenthesized full expression).
+     *
+     * Since unary operators are handled here,
+     * they have a higher precedence than all binary operators.
+     *
+     * By parsing parentheses along with the operands themselves,
+     * their behaviour regarding precedence gets handled automatically.
+     * @return An expression that acts as an operand to a larger operation.
+     *
+     * @see #parse(int)
+     */
     private Expr parsePrimary() {
         var token = shift(tokens);
         switch (token.text()) {
@@ -43,6 +57,22 @@ public record Parser(List<Token> tokens) {
         }
     }
     
+    /**
+     * Underlying implementation of the parser.
+     * Not exposed as under normal circumstances
+     * this method should only be externally called with precedence `0`.
+     * <br />
+     * This uses a simple form of <a href="https://en.wikipedia.org/wiki/Recursive_descent_parser">
+     *     recursive descent parsing</a>.
+     * Operator precedence is handled with a form of
+     * <a href="https://en.wikipedia.org/wiki/Operator-precedence_parser#Precedence_climbing_method">
+     *     precedence climbing.</a>
+     * @param precedence The precedence level with which to parse (See {@linkplain BinaryPrecedence})
+     * @return Expression parsed from input tokens of parser.
+     *
+     * @see #parse()
+     * @see #parsePrimary()
+     */
     private Expr parse(int precedence) {
         if (precedence >= BinaryPrecedence.MAX.ordinal())
             return parsePrimary();
@@ -69,6 +99,15 @@ public record Parser(List<Token> tokens) {
         return new BinaryExpr(lhs, rhs, bop.op, bop.name());
     }
     
+    /**
+     * Parses an expression from input tokens of the Parser object.
+     * Only exposed interface for parsing.
+     *
+     * For implementation details, see {@link Parser#parse(int)}
+     * @return Expression object parsed from tokens field
+     *
+     * @see #parse(int)
+     */
     public Expr parse() {
         return parse(0);
     }

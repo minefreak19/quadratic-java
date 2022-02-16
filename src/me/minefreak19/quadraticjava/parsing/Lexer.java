@@ -3,9 +3,21 @@ package me.minefreak19.quadraticjava.parsing;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Performs <a href="https://en.wikipedia.org/wiki/Lexical_analysis">Lexical analysis</a>.
+ */
 public record Lexer(String src) {
     
-    // TODO: no error reporting/Token class
+    // TODO: no properly located error reporting
+    
+    /**
+     * Only method of Lexer.
+     * Takes the input String, and tokenizes it, splitting it into smaller, meaningful chunks
+     * and so producing a List of {@linkplain Token Tokens}.
+     * @return List of Tokens
+     *
+     * @see Token
+     */
     public List<Token> tokens() {
         var tokens = new ArrayList<Token>();
     

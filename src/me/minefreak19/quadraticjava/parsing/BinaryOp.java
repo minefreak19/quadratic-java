@@ -15,6 +15,10 @@ public enum BinaryOp {
     
     final String name;
     final BinaryPrecedence precedence;
+    /**
+     * Applied on operands during evaluation.
+     * @see me.minefreak19.quadraticjava.parsing.expr.BinaryExpr#eval(EvaluationContext)
+     */
     final BinaryOperator<Double> op;
     
     BinaryOp(String name, BinaryPrecedence precedence, BinaryOperator<Double> op) {
@@ -32,6 +36,16 @@ public enum BinaryOp {
         }
     }
     
+    /**
+     * Looks up a BinaryOp by a String as it would appear in tokenized input.
+     *
+     * Not to be confused with {@link #valueOf}
+     *
+     * {@code fromString("+") -> BinaryOp.PLUS}
+     * {@code valueOf("PLUS") -> BinaryOp.PLUS}
+     * @param s String to lookup by
+     * @return BinaryOp represented by s
+     */
     public static BinaryOp fromString(String s) {
         return BINARY_OPS.get(s);
     }

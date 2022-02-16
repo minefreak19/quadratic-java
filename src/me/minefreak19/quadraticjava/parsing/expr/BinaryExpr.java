@@ -22,6 +22,11 @@ public class BinaryExpr extends Expr {
         this(lhs, rhs, op, null);
     }
     
+    /**
+     * @deprecated will be replaced by use of BinaryOp
+     * human-readable name of operation
+     */
+    @Deprecated
     private static String humanName(String name) {
         return switch (name) {
             case "*" -> "mul";
