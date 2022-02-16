@@ -96,7 +96,7 @@ public record Parser(List<Token> tokens) {
         shift(tokens); // yoink the operator out
         
         Expr rhs = parse(precedence);
-        return new BinaryExpr(lhs, rhs, bop.op, bop.name());
+        return new BinaryExpr(lhs, rhs, bop);
     }
     
     /**

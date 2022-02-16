@@ -13,13 +13,13 @@ public enum BinaryOp {
     
     ;
     
-    final String name;
-    final BinaryPrecedence precedence;
+    public final String name;
+    public final BinaryPrecedence precedence;
     /**
      * Applied on operands during evaluation.
      * @see me.minefreak19.quadraticjava.parsing.expr.BinaryExpr#eval(EvaluationContext)
      */
-    final BinaryOperator<Double> op;
+    public final BinaryOperator<Double> op;
     
     BinaryOp(String name, BinaryPrecedence precedence, BinaryOperator<Double> op) {
         this.name = name;
