@@ -3,7 +3,7 @@ package me.minefreak19.quadraticjava.parsing.expr;
 import me.minefreak19.quadraticjava.parsing.EvaluationContext;
 
 public class PrimaryExpr extends Expr {
-    private double value;
+    private final double value;
     
     public PrimaryExpr(double value) {
         this.value = value;
