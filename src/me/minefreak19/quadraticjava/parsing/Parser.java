@@ -50,7 +50,7 @@ public record Parser(List<Token> tokens) {
                 // if we're here, it must be a number literal or identifier
                 try {
                     return new PrimaryExpr(Double.parseDouble(token.text()));
-                } catch (NumberFormatException ignoreD) {
+                } catch (NumberFormatException ignored) {
                     return new IdentifierExpr(token.text());
                 }
             }
