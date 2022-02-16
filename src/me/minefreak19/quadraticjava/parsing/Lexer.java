@@ -8,7 +8,7 @@ import java.util.List;
  */
 public record Lexer(String src) {
     
-    // TODO: no properly located error reporting
+    // TODO(#1): no properly located error reporting
     
     /**
      * Only method of Lexer.
