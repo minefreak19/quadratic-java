@@ -30,11 +30,13 @@ public record Parser(List<Token> tokens) {
      */
     private Expr parsePrimary() {
         var token = shift(tokens);
-        switch (token.text()) {
-            case "-" -> {
-                return new UnaryExpr(parsePrimary(), x -> -x, "NEG");
-            }
+        {
+            var uop = UnaryOp.fromString(token.text());
             
+            if (uop != null) return new UnaryExpr(parsePrimary(), uop);
+        }
+        
+        switch (token.text()) {
             case ")" -> throw new SyntaxException("Unexpected closing paren");
             
             case "(" -> {
