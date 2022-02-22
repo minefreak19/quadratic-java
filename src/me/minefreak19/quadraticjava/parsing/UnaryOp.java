@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.UnaryOperator;
 
-// TODO: no proper precedence for unary ops
-//  Currently they are simply applied right to left
 public enum UnaryOp {
     NEG("-", x -> -x);
     
